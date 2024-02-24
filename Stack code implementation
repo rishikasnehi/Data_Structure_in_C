@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#define MAX 5
+
+int stack_arr[MAX];
+int top = -1;
+
+bool isEmpty(int top)
+{
+    return (top == -1);
+}
+
+bool isFull(int top)
+{
+    return (top == 5);
+}
+
+void push(int data)
+{
+    if (isFull(top) == true)
+    {
+        printf("stack overflow\n");
+        // return;
+    }
+    top++;
+    stack_arr[top] = data;
+}
+
+int pop()
+{
+    int value;
+    if (isEmpty(top) == true)
+    {
+        printf("stack underflow");
+        // return 0;
+    }
+    else
+    {
+        value = stack_arr[top];
+    }
+    top--;
+    return value;
+}
+
+void print()
+{
+    if (top == -1)
+    {
+        printf("stack underflow");
+        return;
+    }
+
+    for (int i = top; i >= 0; i--)
+    {
+        printf("%d ", stack_arr[i]);
+    }
+
+    printf("\n");
+}
+
+int main()
+{
+    int data;
+    push(5);
+    push(10);
+    push(15);
+    push(20);
+    push(25);
+    print();
+    data = pop();
+    printf("%d \n", data);
+    data = pop();
+    printf("%d \n", data);
+}
