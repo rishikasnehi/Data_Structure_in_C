@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+typedef struct
+{
+    int data;
+    struct MyLinkedList *next;
+} MyLinkedList;
+
+MyLinkedList *myLinkedListCreate()
+{
+    MyLinkedList *new = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    new->next = NULL;
+    return new;
+}
+
+int myLinkedListGet(MyLinkedList *head, int index)
+{
+    int count = 0;
+    while (head != NULL)
+    {
+        if (count == index)
+        {
+            return head->data;
+        }
+        count++;
+        head = head->next;
+    }
+    return -1;
+}
+
+void myLinkedListAddAtHead(MyLinkedList *head, int val)
+{
+    MyLinkedList *newHead = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    newHead->data = val;
+    newHead->next = head;
+}
+
+void myLinkedListAddAtTail(MyLinkedList *head, int val)
+{
+    MyLinkedList *tail = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    tail->data = val;
+    tail->next = NULL;
+    head->next = tail;
+}
+
+void myLinkedListAddAtIndex(MyLinkedList *head, int index, int val)
+{
+    int count = 0;
+    MyLinkedList *temp = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    temp = head;
+    while (head != NULL)
+    {
+        if (count == index)
+        {
+            MyLinkedList *new = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+            new->data = val;
+            new->next = temp->next;
+            temp->next = new;
+        }
+        count++;
+        head = head->next;
+    }
+}
+
+void myLinkedListDeleteAtIndex(MyLinkedList *head, int index)
+{
+    int count = 0;
+    MyLinkedList *current = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    MyLinkedList *prev = (MyLinkedList *)malloc(sizeof(MyLinkedList));
+    prev = head;
+    if (index == 0)
+    {
+        current = current->next;
+        prev->next = NULL;
+        free(prev);
+    }
+    else
+    {
+        while (count < index - 1)
+        {
+            prev = prev->next;
+            count++;
+        }
+        current = prev->next;
+        prev->next = current->next;
+        current->next = NULL;
+        free(current);
+    }
+}
+
+void main()
+{
+}
