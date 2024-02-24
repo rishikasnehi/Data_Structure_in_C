@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+    /* data */
+    int data;
+    struct Node *next;
+} LinkedList;
+
+LinkedList *LinkedListCreate(LinkedList *new_node, int val)
+{
+    LinkedList *new = (LinkedList *)malloc(sizeof(LinkedList));
+    new->data = val;
+    return new;
+}
+
+int main()
+{
+    LinkedList *first_node = LinkedListCreate(first_node, 10);
+    LinkedList *second_node = LinkedListCreate(second_node, 20);
+    LinkedList *third_node = LinkedListCreate(third_node, 30);
+    LinkedList *fourth_node = LinkedListCreate(fourth_node, 40);
+    LinkedList *fifth_node = LinkedListCreate(fifth_node, 50);
+    first_node->next = second_node;
+    second_node->next = third_node;
+    third_node->next = fourth_node;
+    fourth_node->next = fifth_node;
+    fifth_node->next = NULL;
+    struct Node *head = first_node;
+    int target = 20;
+    int count = 0;
+    while (head != NULL)
+    {
+        count++;
+        head = head->next;
+    }
+    head = first_node;
+    while (head != NULL)
+    {
+        if (head->data != target)
+        {
+            printf("%d ", head->data);
+        }
+        else
+        {
+            break;
+        }
+        head = head->next;
+    }
+    printf("number of nodes = %d\n", count);
+    printf("All Good\n");
+    return 0;
+}
